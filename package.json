@@ -17,8 +17,8 @@
     "react-native": "0.76.7",
     "react-native-permissions": "^5.5.1",
     "react-native-safe-area-context": "^5.7.0",
-    "react-native-screens": "^4.24.0",
-    "react-native-vision-camera": "^5.0.1"
+    "react-native-screens": "^4.4.0",
+    "react-native-vision-camera": "^4.7.3"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
