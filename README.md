@@ -1,79 +1,261 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# TMS 드라이버 앱 - 배송 관리 애플리케이션
 
-# Getting Started
+## 📋 소개
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+TMS 드라이버 앱은 배송 기사들을 위한 모바일 애플리케이션으로, 배송 주문 관리, 배송 경로 확인, 배송 상태 추적 등을 효율적으로 관리할 수 있도록 설계되었습니다. 기사들의 일상 업무를 지원하는 사용하기 쉬운 인터페이스를 제공합니다.
 
-## Step 1: Start the Metro Server
+## ✨ 주요 기능
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+- **인증 및 보안**
+  - 계정 로그인/회원가입
+  - 비밀번호 찾기 및 재설정
+  - 신규 계정 24시간 검증 대기
 
-To start Metro, run the following command from the _root_ of your React Native project:
+- **대시보드 (5개 탭)**
+  - **입고 (Entry)**: QR 스캔을 통한 창고 입고
+  - **경로 (Route)**: 배송 경로 상세 정보 확인
+  - **할당 (Assignment)**: 배정된 배송 물품 목록
+  - **상태 (Status)**: 일일 배송 상태 추적
+  - **설정 (Setting)**: 기사 정보 및 보안 설정
 
-```bash
-# using npm
-npm start
+- **경로 관리**
+  - QR 코드로 창고 입고 및 경로 설정
+  - 상품 코드 스캔으로 배송 확인
+  - 배송 필요 지역 목록 확인
 
-# OR using Yarn
-yarn start
+- **추적 및 리포팅**
+  - 날짜별 배송 상태 필터링
+  - 배송 히스토리 확인
+
+## 🔄 애플리케이션 워크플로우
+
+```
+로그인 / 회원가입 / 비밀번호 찾기
+         ↓
+      대시보드
+         ↓
+    ┌─────┬─────┬──────────┬────────┬──────────┐
+    ↓     ↓     ↓          ↓        ↓          ↓
+  입고  경로  할당     상태   설정   대시보드
+    ↓     ↓                 ↓        ↓
+  QR   경로                필터    정보
+  스캔  상세               상태    변경
+  ↓
+경로
+설정
+  ↓
+상품
+스캔
+  ↓
+배송
+목록
 ```
 
-## Step 2: Start your Application
+## 📱 화면 설명
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+### 1. **로그인 화면 (Login Screen)**
+- 계정 정보 입력
+- 회원가입 및 비밀번호 찾기 링크
 
-### For Android
+### 2. **회원가입 (Register Form)**
+**필수 항목:**
+- `phone` - 휴대전화번호
+- `password` - 비밀번호
+- `name` - 이름
+- `address` - 주소
+- `email` - 이메일
+- `residentNumber` - 신분증번호
+- `vehicleNumber` - 차량번호
+- `vehicleType` - 차종
+- `tonnage` - 적재량
+- `vehiclePicture` - 차량 사진
 
-```bash
-# using npm
-npm run android
+**선택 항목:**
+- `avatar` - 프로필 사진
+- `phone2` - 추가 전화번호
+- `birthday` - 생년월일
 
-# OR using Yarn
-yarn android
+### 3. **비밀번호 찾기 (Forgot Password Form)**
+**필수 항목:**
+- `userName` - 사용자명
+- `phoneNumber` - 휴대전화번호
+- `validateCode` - 인증코드
+
+### 4. **대시보드**
+5개의 주요 탭으로 구성:
+
+#### **탭 1: 입고 (Entry)**
+- 창고 QR 코드 스캔으로 배송 경로 설정
+- 상품 코드 스캔으로 배송 확인
+- 배송할 물품 목록 확인
+
+#### **탭 2: 경로 (Route)**
+- 배송 경로 상세 정보 확인
+- 배송 필요 지역 목록
+- 각 배송의 상태 확인
+
+#### **탭 3: 할당 (Assignment)**
+- 배정된 배송 주문 목록
+- 각 주문의 상세 정보
+- 배송 상태 업데이트
+
+#### **탭 4: 상태 (Status)**
+- 날짜별 배송 상태 필터링
+- 일일 배송 히스토리
+- 완료 통계 확인
+
+#### **탭 5: 설정 (Setting)**
+- 기사 정보 변경
+- 비밀번호 변경
+- 개인 정보 관리
+
+## 🔐 요구사항 및 규정
+
+- **필수 사항:**
+  - 유효한 휴대전화번호
+  - 강력한 비밀번호 (최소 6자 이상)
+  - 정확한 차량 정보
+  - 명확한 차량 사진
+
+- **인증 절차:**
+  - 신규 계정은 24시간 검증 대기 필요
+  - 이메일 또는 SMS로 확인
+  - 인증코드 유효시간 10분
+
+## 📊 데이터 구조
+
+### 사용자 데이터
+```
+- ID: 사용자 ID
+- Name: 이름
+- Phone: 휴대전화번호
+- Email: 이메일
+- ResidentNumber: 신분증번호
+- Avatar: 프로필 사진
+- Birthday: 생년월일
+- Address: 주소
 ```
 
-### For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+### 차량 데이터
+```
+- VehicleNumber: 차량번호
+- VehicleType: 차종
+- Tonnage: 적재량
+- VehiclePicture: 차량 사진
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+### 배송 데이터
+```
+- RouteID: 경로 ID
+- AssignmentID: 할당 ID
+- PickupLocation: 픽업 위치 (QR 스캔)
+- DeliveryLocations: 배송 위치
+- Products: 상품 (QR 스캔)
+- Status: 상태 (대기중, 진행중, 완료)
+- Date: 배송 날짜
+```
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+## 🚀 설치 및 실행
 
-## Step 3: Modifying your App
+### 요구사항
+- Node.js 14 이상
+- npm 또는 yarn
+- Android/iOS 에뮬레이터 또는 실제 디바이스
 
-Now that you have successfully run the app, let's modify it.
+### 설치 단계
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+1. **저장소 클론**
+   ```bash
+   git clone <repository-url>
+   cd tms-driver-app
+   ```
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+2. **의존성 설치**
+   ```bash
+   npm install
+   # 또는
+   yarn install
+   ```
 
-## Congratulations! :tada:
+3. **환경 설정**
+   ```bash
+   cp .env.example .env
+   # API 엔드포인트, 키 등 값 업데이트
+   ```
 
-You've successfully run and modified your React Native App. :partying_face:
+4. **메트로 번들러 시작**
+   ```bash
+   npm start
+   # 또는
+   yarn start
+   ```
 
-### Now what?
+5. **애플리케이션 실행**
+   ```bash
+   # Android (새로운 터미널에서)
+   npm run android
+   
+   # iOS (새로운 터미널에서)
+   npm run ios
+   ```
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+## 📖 사용 가이드
 
-# Troubleshooting
+### 기사용
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+1. **계정 등록**
+   - 앱을 설치하고 "회원가입" 선택
+   - 개인 정보 및 차량 정보 입력
+   - 차량 사진 촬영
+   - 검증 대기 (24시간)
 
-# Learn More
+2. **로그인**
+   - 휴대전화번호/이메일 및 비밀번호 입력
+   - "로그인" 버튼 클릭
 
-To learn more about React Native, take a look at the following resources:
+3. **배송 시작**
+   - "입고" 탭 이동
+   - 창고 QR 코드 스캔으로 배송 목록 확인
+   - 각 상품 코드 스캔으로 확인
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+4. **경로 확인**
+   - "경로" 탭에서 배송 경로 상세 정보 확인
+   - 배송 필요 지역 목록 확인
+
+5. **배송 진행**
+   - "할당" 탭에서 배송 주문 확인
+   - 배송 완료 시 상태 업데이트
+   - 필요시 메모 또는 사진 추가
+
+6. **상태 확인**
+   - "상태" 탭 이동
+   - 원하는 날짜 선택
+   - 해당 날짜의 배송 상태 및 통계 확인
+
+## 🔧 문제 해결
+
+| 문제 | 해결방법 |
+|------|---------|
+| QR 스캔이 작동하지 않음 | 카메라 권한 확인, 충분한 조명 확보 |
+| 로그인 불가 | 인터넷 연결 확인, 계정 정보 재확인 |
+| 정보가 업데이트되지 않음 | 연결 확인, 앱 새로고침 시도 |
+| 앱 충돌 | 최신 버전 업데이트, 캐시 삭제 |
+| 메트로 번들러 오류 | `npm start` 재실행, node_modules 재설치 |
+
+## 📞 연락처 및 지원
+
+- **이메일**: stonepine.it@gmail.com
+- **버그 보고**: [이슈 트래커 URL]
+- **문서**: [문서 링크]
+
+## 📄 라이선스
+
+MIT License - 자세한 내용은 LICENSE 파일 참조
+
+## 👨‍💻 개발자
+
+TMS 팀에서 개발
+
+---
+
+**최종 업데이트**: 2026년 4월 21일
