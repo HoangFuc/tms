@@ -34,7 +34,7 @@ const Checkbox = React.memo(
         disabled={disabled}
         activeOpacity={0.7}
         hitSlop={{top: 8, bottom: 8, left: 8, right: 8}}
-        style={[{opacity: disabled ? 0.4 : 1}, style]}>
+        style={[disabled && styles.opacityDisabled, style]}>
         {checked ? (
           <TickSquare size={dim} color={colors.primary} variant="Bold" />
         ) : (
@@ -56,6 +56,9 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: colors.border.default,
     backgroundColor: colors.white,
+  },
+  opacityDisabled: {
+    opacity: 0.4,
   },
 });
 

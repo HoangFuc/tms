@@ -27,8 +27,8 @@ const ALERT_CONFIG: Record<TAlertType, {color: string}> = {
 //---------------------------------------
 const AlertIcon = React.memo(({type, color}: {type: TAlertType; color: string}) => {
   const size = 20;
-  if (type === 'success') return <TickCircle size={size} color={color} variant="Bold" />;
-  if (type === 'error')   return <CloseCircle size={size} color={color} variant="Bold" />;
+  if (type === 'success') { return <TickCircle size={size} color={color} variant="Bold" />; }
+  if (type === 'error')   { return <CloseCircle size={size} color={color} variant="Bold" />; }
   return <InfoCircle size={size} color={color} variant="Bold" />;
 });
 

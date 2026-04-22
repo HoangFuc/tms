@@ -54,7 +54,7 @@ export const ToastProvider = ({children}: {children: React.ReactNode}) => {
 
   // fade-in → hiện 3s → fade-out → clear
   useEffect(() => {
-    if (!toast) return;
+    if (!toast) { return; }
 
     anim.opacity.value    = withTiming(1,   {duration: 250});
     anim.translateY.value = withTiming(0,   {duration: 250});

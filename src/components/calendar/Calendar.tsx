@@ -233,29 +233,11 @@ const Calendar = React.memo(
                     )}
                     {/* Range strip — right half of start */}
                     {isStart && rangeEnd != null && !isLastCol && (
-                      <View
-                        style={{
-                          position: 'absolute',
-                          top: 0,
-                          bottom: 0,
-                          left: '50%',
-                          right: 0,
-                          backgroundColor: colors.calendar.range,
-                        }}
-                      />
+                      <View style={styles.rangeStripRight} />
                     )}
                     {/* Range strip — left half of end */}
                     {isEnd && rangeStart != null && !isFirstCol && (
-                      <View
-                        style={{
-                          position: 'absolute',
-                          top: 0,
-                          bottom: 0,
-                          left: 0,
-                          right: '50%',
-                          backgroundColor: colors.calendar.range,
-                        }}
-                      />
+                      <View style={styles.rangeStripLeft} />
                     )}
                     {/* Selected circle */}
                     {highlighted ? (
@@ -476,6 +458,22 @@ const styles = StyleSheet.create({
   selectedChipText: {
     color: colors.white,
     fontWeight: '600',
+  },
+  rangeStripRight: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: '50%',
+    right: 0,
+    backgroundColor: colors.calendar.range,
+  },
+  rangeStripLeft: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: '50%',
+    backgroundColor: colors.calendar.range,
   },
 });
 
