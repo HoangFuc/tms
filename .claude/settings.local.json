@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(./gradlew assembleDebug)",
-      "Bash(adb -s emulator-5554 shell df)"
+      "Bash(adb -s emulator-5554 shell df)",
+      "Bash(npm run *)",
+      "Bash(npx tsc *)"
     ]
   }
 }
