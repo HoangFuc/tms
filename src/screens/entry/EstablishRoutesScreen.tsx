@@ -21,9 +21,9 @@ export default function EstablishRoutesScreen({ navigation, route }: Props) {
 
   const handleCodeScanned = useCallback(
     (codes: { value?: string }[]) => {
-      if (!isScanning) return;
+      if (!isScanning) { return; }
       const value = codes[0]?.value;
-      if (!value || value === lastScannedRef.current) return;
+      if (!value || value === lastScannedRef.current) { return; }
 
       lastScannedRef.current = value;
       setIsScanning(false);

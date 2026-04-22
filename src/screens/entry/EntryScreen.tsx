@@ -10,7 +10,7 @@ export default function EntryScreen({ navigation }: Props) {
 
   const handleScanWarehouse = async () => {
     const granted = isGranted || (await requestPermission());
-    if (!granted) return;
+    if (!granted) { return; }
     navigation.navigate('EstablishRoutes', { warehouseQrCode: 'WAREHOUSE_001' });
   };
 

@@ -33,7 +33,7 @@ const RadioButton = React.memo(
         disabled={disabled}
         activeOpacity={0.7}
         hitSlop={{top: 8, bottom: 8, left: 8, right: 8}}
-        style={[{opacity: disabled ? 0.4 : 1}, style]}>
+        style={[disabled && styles.opacityDisabled, style]}>
         <View
           style={[
             styles.outer,
@@ -67,6 +67,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.white,
+  },
+  opacityDisabled: {
+    opacity: 0.4,
   },
 });
 
